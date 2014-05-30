@@ -1,0 +1,62 @@
+{namespace nethack.price}
+
+/** Renders the main page. */
+{template .main}
+  // Options
+  <div class="options">
+    <select id="charisma">
+      // Note: the number is multiplied by 3 (i.e. 3 -> 100%)
+      <option value="6">CHA &lt; 6</option>
+      <option value="4.5">CHA = 6, 7</option>
+      <option value="4">CHA = 8..10</option>
+      <option value="3" selected>CHA = 11..15</option>
+      <option value="2.25">CHA = 16, 17</option>
+      <option value="2">CHA = 18</option>
+      <option value="1.5">CHA > 18</option>
+    </select>
+    <select id="price">
+      <option selected>base</option>
+      <option>buy</option>
+      <option>sell</option>
+    </select>
+    <span title="TOU XL<15 or visible shirt or dunce cap">
+      <select id="sucker">
+        <option value="0">not sucker</option>
+        <option value="1">sucker</option>
+      </select>
+    </span>
+  </div>
+  // Table
+  <div id="table"></div>
+{/template}
+
+/**
+ * @param name {string}
+ * @param prices {Array.<{
+ *     price: number,
+ *     base: Array.<{
+ *         price: number,
+ *         items: Array.<{name: string}>}>}>}
+ */
+{template .type}
+  <div class="type">
+    <div class="type-name">{$name}</div>
+    {foreach $price in $prices}
+      <div class="pricegroup">
+       <span class="price">{$price.price}</span>
+       <span class="bases">
+         {foreach $base in $price.base}
+           <span>{$base.price}</span>
+         {/foreach}
+       </span>
+       <span class="items">
+         {foreach $base in $price.base}
+           {foreach $item in $base.items}
+             <span {if $item.danger}class="danger"{/if}>{$item.name}</span>
+           {/foreach}
+         {/foreach}
+       </span>
+      </div>      
+    {/foreach}
+  </div>
+{/template}

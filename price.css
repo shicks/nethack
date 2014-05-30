@@ -1,0 +1,21 @@
+.type-name {
+  font-size: 112%;
+  font-weight: bold;
+}
+.pricegroup .price {
+  display: inline-block;
+  width: 2.5em;
+}
+.pricegroup .bases {
+  display: inline-block;
+  width: 5em;
+}
+.pricegroup .bases span {
+  margin: 7px;
+}
+.pricegroup .items span {
+  margin: 7px;
+}
+.danger {
+  color: red;
+}
